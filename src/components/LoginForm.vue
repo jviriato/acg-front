@@ -4,13 +4,13 @@
       <label>Usuário</label>
       <md-input v-validate="'required'" v-model="user" name="user" type="text"></md-input>
     </md-field>
-      <span>{{ errors.first('user') }}</span>
+      <span class="error">{{ errors.first('user') }}</span>
     
     <md-field>
       <label>Senha</label>
       <md-input  v-validate="'required'" v-model="password" name="password" type="password"></md-input>
     </md-field>
-    <span>{{ errors.first('password') }}</span>
+    <span class="error">{{ errors.first('password') }}</span>
 
     <md-button class="md-dense md-raised md-primary button" @click="signIn()">Entrar</md-button>
   </div>
@@ -47,7 +47,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+.error {
+  text-align: left;
+}
+
 .form-wrapper {
   display: flex;
   flex-direction: column;
