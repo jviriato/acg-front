@@ -40,7 +40,7 @@ export default {
     
     signIn() {
       if(this.isFormValid()) {
-        console.log('Estou logando. O user é ' + this.user + ' e a senha é: ' + this.password);
+        this.$router.push({name: 'enviarFormulario'})
       }
     }
   },
