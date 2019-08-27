@@ -5,7 +5,11 @@
       <primeiro-passo v-on:fim-primeiro-passo="checkFirstStep" />
     </div>
     <div v-if="step == 2">
-      <segundo-passo />
+      <segundo-passo v-on:fim-segundo-passo="checkFirstStep"/>
+    </div>
+    <div class="fim" v-if="step == 3">
+      <icon-success />
+      <h1>Parabéns! Sua ACG foi enviada com sucesso!</h1>
     </div>
   </div>
 </template>
@@ -14,6 +18,7 @@
 import Input from "@/components/commons/Input.vue";
 import PrimeiroPasso from "@/components/enviarFormulario/primeiroPasso.vue";
 import SegundoPasso from "@/components/enviarFormulario/segundoPasso.vue";
+import IconSuccess from "@/components/commons/IconSuccess.vue";
 import moment from "moment";
 export default {
   name: "enviarFormulario",
@@ -21,7 +26,8 @@ export default {
   components: {
     Input,
     PrimeiroPasso,
-    SegundoPasso
+    SegundoPasso,
+    IconSuccess
   },
 
   data() {
@@ -47,6 +53,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.fim {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  padding: 1em;
+  line-height: 20px;
+  justify-content: center;
+  align-items: center;
+}
 .top {
   display: flex;
   justify-content: space-between;

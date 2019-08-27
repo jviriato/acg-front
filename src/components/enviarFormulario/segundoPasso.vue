@@ -91,6 +91,7 @@ export default {
   }
   .sub {
     font-size: 1.7em;
+    font-weight: 400;
   }
   .helper-text {
     text-align: left !important;

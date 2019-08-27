@@ -17,10 +17,15 @@
       <label>Dê uma descrição da atividade realizada</label>
       <md-textarea v-model="textarea"></md-textarea>
     </md-field>
-    <md-field>
-      <label>A carga horária foi de</label>
-      <md-input v-model="horasAtividades"></md-input>
-    </md-field>
+    <div class="carga-horaria">
+      Carga horária:
+      <div class="input">
+        <md-field>
+          <md-input v-model="horasAtividades"></md-input>
+        </md-field>
+      </div>
+      <p>horas</p>
+    </div>
 
     <div class="button-wrapper">
       <md-button class="md-dense md-raised md-primary button" @click="done()">Próximo</md-button>
@@ -51,7 +56,8 @@ export default {
         "Monitoria",
         "Outras Atividades"
       ],
-      opcaoSelecionada: ""
+      opcaoSelecionada: "",
+      horasAtividades: ""
     };
   },
   mounted() {
@@ -70,6 +76,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.carga-horaria {
+  display: flex;
+  font-size: 1.5em;
+  align-items: center;
+  .input {
+    margin: 0 .3em;
+    width: 50px;
+    overflow: hidden;
+  }
+}
+
 .top {
   display: flex;
   justify-content: space-between;
@@ -106,6 +123,7 @@ export default {
   }
   .sub {
     font-size: 1.7em;
+    font-weight: 400;
   }
   .helper-text {
     text-align: left !important;
