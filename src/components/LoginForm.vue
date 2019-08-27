@@ -63,7 +63,6 @@ export default {
     color: white !important;
     font-family: 'Roboto';
     font-weight: bold;
-    
   }
 }
 </style>

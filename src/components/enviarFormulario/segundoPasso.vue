@@ -1,46 +1,54 @@
 <template>
-  <div>
-    <div class="title">Enviar ACG</div>
-    <div v-if="step == 1">
-      <primeiro-passo v-on:fim-primeiro-passo="checkFirstStep" />
+  <div class="form padding">
+    <div class="top">
+      <p class="text">Olá, {{ name }}!</p>
+      <p class="date">{{ data }}</p>
     </div>
-    <div v-if="step == 2">
-      <segundo-passo />
+    <p class="text sub">Para enviar sua ACG, responda algumas perguntas:</p>
+    <div class="md-layout-item">
+      <md-field>
+        <label>Onde foi o local de atividade?</label>
+        <md-input v-model="localAtividade"></md-input>
+      </md-field>
+    </div>
+    <md-datepicker v-model="dataInicial">
+      <label>Data inicial</label>
+    </md-datepicker>
+    <md-datepicker v-model="dataFinal">
+      <label>Data final</label>
+    </md-datepicker>
+    <div class="button-wrapper">
+      <md-button class="md-dense md-raised md-primary button" @click="done()">Próximo</md-button>
     </div>
   </div>
 </template>
 
 <script>
-import Input from "@/components/commons/Input.vue";
-import PrimeiroPasso from "@/components/enviarFormulario/primeiroPasso.vue";
-import SegundoPasso from "@/components/enviarFormulario/segundoPasso.vue";
 import moment from "moment";
-export default {
-  name: "enviarFormulario",
 
-  components: {
-    Input,
-    PrimeiroPasso,
-    SegundoPasso
-  },
+export default {
+  name: "segundoPasso",
 
   data() {
     return {
-      step: 1,
       name: "José",
       matricula: "",
-      data: ""
+      data: "",
+      localAtividade: "",
+      dataInicial: null,
+      dataFinal: null,
     };
+  },
+  mounted() {
+    this.data = moment().format("DD/MM/YYYY");
   },
 
   methods: {
-    nextStep() {
-      const TOTAL_STEPS = 3;
-      this.step += 1 % TOTAL_STEPS;
-    },
-
-    checkFirstStep(data) {
-      this.nextStep();
+    done() {
+      this.$emit("fim-segundo-passo", {
+        opcaoSelecionada: this.opcaoSelecionada,
+        descricao_atividade: this.textarea
+      });
     }
   }
 };
@@ -65,7 +73,6 @@ export default {
   font-size: 2em;
   color: white;
   background: $primary;
-  padding-bottom: 3.5em;
 }
 
 .form {
@@ -97,7 +104,7 @@ export default {
   }
   .fade-enter-active,
   .fade-leave-active {
-    transition: opacity 0.5s;
+    transition: opacity 2s;
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
     opacity: 0;

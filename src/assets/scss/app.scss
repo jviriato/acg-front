@@ -1,2 +1,14 @@
 @import 'fonts';
 @import 'variables';
+
+.button {
+    border-radius: 22px !important;
+    background: $primary !important;
+    color: white !important;
+    font-family: 'Roboto';
+    font-weight: bold;
+}
+
+textarea {
+    resize: none !important;
+}
