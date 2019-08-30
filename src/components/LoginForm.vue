@@ -11,8 +11,9 @@
       <md-input  v-validate="'required'" v-model="password" name="password" type="password"></md-input>
     </md-field>
     <span class="error">{{ errors.first('password') }}</span>
-
-    <md-button class="md-dense md-raised md-primary button" @click="signIn()">Entrar</md-button>
+    <div class="button-wrapper">
+      <md-button class="md-dense md-raised md-primary button" @click="signIn()">Entrar</md-button>
+    </div>
   </div>
 </template>
 
@@ -40,7 +41,7 @@ export default {
     
     signIn() {
       if(this.isFormValid()) {
-        this.$router.push({name: 'enviarFormulario'})
+        this.$router.push({name: 'dashboard'})
       }
     }
   },
@@ -48,6 +49,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  background: transparent;
+}
 .error {
   text-align: left;
 }
