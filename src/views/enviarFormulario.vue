@@ -58,6 +58,14 @@ export default {
 .align {
   text-align: center;
 }
+.fim {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  padding: 1em;
+  line-height: 20px;
+  align-items: center;
+}
 @media (min-width: 979px) {
   .wrapper {
     display: inline-block;
@@ -68,14 +76,6 @@ export default {
   .fim {
     display: inline-block;
   }
-}
-.fim {
-  display: flex;
-  flex-direction: column;
-  height: 80vh;
-  padding: 1em;
-  line-height: 20px;
-  align-items: center;
 }
 .top {
   display: flex;
