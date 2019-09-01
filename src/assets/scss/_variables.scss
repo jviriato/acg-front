@@ -1,6 +1,7 @@
 $background-gray: #f5f7fb;
 $background-color: #f3f4f5;
 $primary: #0063ff;
+$blue-gradient: linear-gradient(0deg, rgb(0, 82, 204) 20%, rgb(38, 132, 255) 80%);
 
 @import "~vue-material/dist/theme/engine"; // Import the theme engine
 

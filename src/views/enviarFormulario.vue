@@ -1,15 +1,17 @@
 <template>
   <div>
     <div class="title">Enviar ACG</div>
-    <div v-if="step == 1">
-      <primeiro-passo v-on:fim-primeiro-passo="checkFirstStep" />
-    </div>
-    <div v-if="step == 2">
-      <segundo-passo v-on:fim-segundo-passo="checkFirstStep"/>
-    </div>
-    <div class="fim" v-if="step == 3">
-      <icon-success />
-      <h1>Parabéns! Sua ACG foi enviada com sucesso!</h1>
+    <div class="align">
+      <div class="wrapper" v-if="step == 1">
+        <primeiro-passo v-on:fim-primeiro-passo="checkFirstStep" />
+      </div>
+      <div class="wrapper" v-if="step == 2">
+        <segundo-passo v-on:fim-segundo-passo="checkFirstStep"/>
+      </div>
+      <div class="wrapper fim" v-if="step == 3">
+        <icon-success />
+        <h1>Parabéns! Sua ACG foi enviada com sucesso!</h1>
+      </div>
     </div>
   </div>
 </template>
@@ -53,13 +55,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.align {
+  text-align: center;
+}
+@media (min-width: 979px) {
+  .wrapper {
+    display: inline-block;
+    width: 40%;
+    align-self: center;
+    text-align: center;
+  }
+  .fim {
+    display: inline-block;
+  }
+}
 .fim {
   display: flex;
   flex-direction: column;
   height: 80vh;
   padding: 1em;
   line-height: 20px;
-  justify-content: center;
   align-items: center;
 }
 .top {
