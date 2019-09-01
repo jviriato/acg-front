@@ -8,19 +8,21 @@
           </div>
       </div>
       <div class="acg-wrapper">
-          <div class="acg-card">
-              <div class="percentage"></div>
-              <div class="title"></div>
-              <div class="hours"></div>
-              <div class="text"></div>
+          <div>
+              <acg-card />
           </div>
       </div>
   </div>
 </template>
 
 <script>
+import AcgCard from "@/components/commons/AcgCard.vue";
 export default {
     name: "Dashboard",
+    components: {
+        AcgCard,
+    },
+
     data() {
         return {
             acgs: []

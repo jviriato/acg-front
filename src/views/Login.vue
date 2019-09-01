@@ -25,6 +25,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-color: linear-gradient(0deg, rgb(0, 82, 204) 20%, rgb(38, 132, 255) 80%);
   // background: #5433ff;
   // background: -webkit-linear-gradient(to right, #5433ff, #20bdff, #a5fecb);
   // background: linear-gradient(to right, #5433ff, #20bdff, #a5fecb);
@@ -36,7 +37,8 @@ export default {
   align-items: flex-start;
   width: 33vw;
   text-align: left;
-
+  border-radius: 8px;
+  padding: 1em;
   h2 {
     font-weight: 400;
   }
