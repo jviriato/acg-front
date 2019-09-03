@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Login from "./views/Login.vue";
 import enviarFormulario from "./views/enviarFormulario.vue";
 import Dashboard from "./views/Dashboard.vue";
+import Status from "./views/Status.vue";
 
 Vue.use(Router);
 
@@ -14,6 +15,11 @@ export default new Router({
       component: Login
     },
     {
+      path: "/status",
+      name: "status",
+      component: Status
+    },
+    {
       path: "/dashboard",
       name: "dashboard",
       component: Dashboard
@@ -21,7 +27,7 @@ export default new Router({
     {
       path: "/enviar-formulario",
       name: "enviarFormulario",
-      component: enviarFormulario,
+      component: enviarFormulario
     }
   ]
 });
