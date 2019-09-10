@@ -6,8 +6,8 @@
       </div>
       <p class="text">
         Você tem
-        <b>217</b> horas de
-        <b>290</b>.
+        <b>{{hours}}</b> horas de
+        <b>{{totalHours}}</b>.
       </p>
     </div>
   </div>
@@ -97,7 +97,7 @@ export default {
 }
 @media (max-width: 979px) {
   .hero {
-    height: 100vh !important;
+    height: 60vh !important;
     align-content: flex-start;
     justify-content: flex-start;
   }

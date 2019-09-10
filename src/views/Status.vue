@@ -35,7 +35,7 @@ export default {
   align-content: center;
   align-items: center;
   width: 100vw;
-  height: 20vh;
+  height: 30vh;
   color: white;
   background-color: rgb(0, 82, 204);
   .hero-wrapper {
@@ -47,6 +47,7 @@ export default {
 }
 .wrapper-bg {
   display: flex;
+  height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -57,6 +58,7 @@ export default {
   flex-direction: column;
   align-items: center;
   width: 40vw;
+  height: 80vh;
 }
 
 .badges-wrapper {
