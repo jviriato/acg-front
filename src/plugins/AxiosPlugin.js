@@ -1,8 +1,5 @@
 import Vue from "vue";
 import axios from "axios";
-import EventBus from "./EventBus";
-
-Vue.use(EventBus);
 
 const vue = new Vue({});
 
@@ -25,7 +22,6 @@ axios.interceptors.response.use(
         return response;
     },
     error => {
-        vue.$events.$emit("logout");
         return Promise.reject(error);
     });
 
