@@ -35,7 +35,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 33vw;
+  width: 480px;
   text-align: left;
   border-radius: 8px;
   background-color: $background-gray;
@@ -43,6 +43,7 @@ export default {
   h2 {
     font-weight: 400;
   }
+  box-shadow: 0 12px 18px 2px rgba(34,0,51,.04),0 6px 22px 4px rgba(7,48,114,.12),0 6px 10px -4px rgba(14,13,26,.12);
 }
 
 @media only screen and (max-width : 440px) {
