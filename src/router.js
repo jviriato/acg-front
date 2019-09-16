@@ -4,6 +4,7 @@ import Login from "./views/Login.vue";
 import enviarFormulario from "./views/enviarFormulario.vue";
 import Dashboard from "./views/Dashboard.vue";
 import Status from "./views/Status.vue";
+import adminPanel from "./views/adminPanel.vue";
 
 Vue.use(Router);
 
@@ -28,6 +29,11 @@ export default new Router({
       path: "/enviar-formulario",
       name: "enviarFormulario",
       component: enviarFormulario
+    },
+    {
+      path: "/admin-panel",
+      name: "adminPanel",
+      component: adminPanel
     }
   ]
 });
