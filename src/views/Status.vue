@@ -44,7 +44,7 @@ export default {
 
   methods: {
     getUserFromLocalStorage() {
-      this.user = JSON.parse(localStorage.getItem('user'));
+      this.user = JSON.parse(localStorage.getItem("user"));
     },
 
     async getHorasAcgs() {
@@ -60,7 +60,7 @@ export default {
       } catch (error) {
         console.error(error);
         this.loading = false;
-        this.$router.push({name: 'login'});
+        this.$router.push({name: "login"});
       }
     },
   },

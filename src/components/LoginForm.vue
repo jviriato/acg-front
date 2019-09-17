@@ -2,15 +2,15 @@
   <div class="form-wrapper">
     <md-field>
       <label>Usuário</label>
-      <md-input v-validate="'required'" v-model="user" name="user" type="text"></md-input>
+      <md-input v-validate=""required"" v-model="user" name="user" type="text"></md-input>
     </md-field>
-      <span class="error">{{ errors.first('user') }}</span>
+      <span class="error">{{ errors.first("user") }}</span>
     
     <md-field>
       <label>Senha</label>
-      <md-input  v-validate="'required'" v-model="password" name="password" type="password"></md-input>
+      <md-input  v-validate=""required"" v-model="password" name="password" type="password"></md-input>
     </md-field>
-    <span class="error">{{ errors.first('password') }}</span>
+    <span class="error">{{ errors.first("password") }}</span>
     <div class="button-wrapper">
       <md-button class="md-dense md-raised md-primary button" @click="signIn()">Entrar</md-button>
     </div>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import VeeValidate from 'vee-validate';
+import VeeValidate from "vee-validate";
 
 export default {
   name: "LoginForm",
@@ -63,14 +63,14 @@ export default {
     signIn() {
       if(this.isFormValid() && this.getHorasTotais()) {
         setTimeout(() => {
-          this.$router.push({name: 'dashboard'});
+          this.$router.push({name: "dashboard"});
         }, 1000);
       }
     },
 
     removeUserFromLocalStorage() {
       if (localStorage.user) {
-        localStorage.removeItem('user');
+        localStorage.removeItem("user");
       }
     }
   }

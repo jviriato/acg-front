@@ -47,7 +47,7 @@ export default {
         }
         
         &::before, &::after {
-            content: '';
+            content: "";
             height: 100px;
             position: absolute;
             background: #f3f4f5;

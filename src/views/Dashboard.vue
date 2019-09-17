@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import AcgCard from '@/components/commons/AcgCard.vue';
-import Hero from '@/components/Dashboard/Hero.vue';
+import AcgCard from "@/components/commons/AcgCard.vue";
+import Hero from "@/components/Dashboard/Hero.vue";
 export default {
-  name: 'Dashboard',
+  name: "Dashboard",
   components: {
     AcgCard,
     Hero
@@ -44,11 +44,11 @@ export default {
 
   methods: {
     goToEnviarACG() {
-      this.$router.push({ name: 'enviarFormulario' });
+      this.$router.push({ name: "enviarFormulario" });
     },
 
     getUserFromLocalStorage() {
-      this.user = JSON.parse(localStorage.getItem('user'));
+      this.user = JSON.parse(localStorage.getItem("user"));
     },
 
     async getHorasAcgs() {
@@ -64,7 +64,7 @@ export default {
       } catch (error) {
         console.error(error);
         this.loading = false;
-        this.$router.push({name: 'login'});
+        this.$router.push({name: "login"});
       }
     },
 
@@ -82,14 +82,14 @@ export default {
       } catch (error) {
         console.error(error);
         this.loading = false;
-        this.$router.push({name: 'login'});
+        this.$router.push({name: "login"});
       }
     },
 
     randomColor() {
-      return ('hsl(' + 320 * Math.random() + ', ' +
-                 '100%,' +
-                 (40 + 13 * Math.random()) + '%)');
+      return ("hsl(" + 320 * Math.random() + ", " +
+                 "100%," +
+                 (40 + 13 * Math.random()) + "%)");
     },
   }
 };

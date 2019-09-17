@@ -41,12 +41,12 @@ export default {
       step: 1,
       data: "",
       form: {
-        descricao: '',
-        tipo: '',
-        horas: '',
-        local: '',
-        data_inicio: '',
-        data_final: '',
+        descricao: "",
+        tipo: "",
+        horas: "",
+        local: "",
+        data_inicio: "",
+        data_final: "",
       },
       user: {},
     };
@@ -61,13 +61,13 @@ export default {
       if (this.user && this.user.nome) {
         return this.user.nome;
       }
-      return '';
+      return "";
     }
   },
 
   methods: {
     getUser() {
-      this.user = JSON.parse(localStorage.getItem('user'));
+      this.user = JSON.parse(localStorage.getItem("user"));
     },
 
     nextStep() {
@@ -77,7 +77,7 @@ export default {
 
     checkFirstStep(data) {
       if(!data || !data.descricao_atividade || !data.opcaoSelecionada || !data.horasAtividades) {
-        alert('preencha todos os campos');
+        alert("preencha todos os campos");
         return;
       }
 
@@ -89,7 +89,7 @@ export default {
 
     checkSecondStep(data) {
       if(!data || !data.localAtividade || !data.dataInicial || !data.dataFinal) {
-        alert('preencha todos os campos');
+        alert("preencha todos os campos");
         return;
       }
 
@@ -100,11 +100,11 @@ export default {
     },
 
     async enviarAcg() {
-      const data_inicial = moment(this.form.data_inicio, 'YYYY-MM-DD').format('YYYY-MM-DD');
-      const data_final = moment(this.form.data_final, 'YYYY-MM-DD').format('YYYY-MM-DD');
+      const data_inicial = moment(this.form.data_inicio, "YYYY-MM-DD").format("YYYY-MM-DD");
+      const data_final = moment(this.form.data_final, "YYYY-MM-DD").format("YYYY-MM-DD");
 
       try {
-        await this.$http.post('/acg', {
+        await this.$http.post("/acg", {
           id_aluno: this.user.id,
           id_categoria: 2,
           horas_requisitadas: this.form.horas,

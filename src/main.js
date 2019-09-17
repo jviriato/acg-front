@@ -4,7 +4,7 @@ import router from "./router";
 import VeeValidate from "vee-validate";
 import VueProgress from "vue-progress";
 import AxiosPlugin from "./plugins/AxiosPlugin";
-import { Slide } from 'vue-burger-menu';
+import { Slide } from "vue-burger-menu";
 import { MdButton, MdContent, MdField, MdCard, MdMenu, MdList, MdDatepicker } from "vue-material/dist/components";
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
