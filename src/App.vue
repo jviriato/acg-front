@@ -16,6 +16,9 @@
       <div class="item-menu" id="status" @click="$router.push('/status')">
         <span>Status das ACGs</span>
       </div>
+      <div class="item-menu" id="admin" @click="$router.push('/admin-panel')">
+        <span>Painel Administrativo</span>
+      </div>
     </Slide>
     <router-view />
   </div>

@@ -4,7 +4,7 @@ import Login from "./views/Login.vue";
 import enviarFormulario from "./views/enviarFormulario.vue";
 import Dashboard from "./views/Dashboard.vue";
 import Status from "./views/Status.vue";
-import adminPanel from "./views/adminPanel.vue";
+import adminPanel from "./views/AdminPanel.vue";
 
 Vue.use(Router);
 
