@@ -6,17 +6,17 @@
       integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
       crossorigin="anonymous"
     />
-    <Slide v-if="this.$route.path !== "/"">
-      <div class="item-menu" id="dashboard" @click="$router.push("/dashboard")">
+    <Slide v-if="this.$route.path !== '/'">
+      <div class="item-menu" id="dashboard" @click="$router.push('/dashboard')">
         <span>Dashboard</span>
       </div>
-      <div class="item-menu" id="enviarACG" @click="$router.push("/enviar-formulario")">
+      <div class="item-menu" id="enviarACG" @click="$router.push('/enviar-formulario')">
         <span>Enviar ACG</span>
       </div>
-      <div class="item-menu" id="status" @click="$router.push("/status")">
+      <div class="item-menu" id="status" @click="$router.push('/status')">
         <span>Status das ACGs</span>
       </div>
-      <div class="item-menu" id="admin" @click="$router.push("/admin-panel")">
+      <div class="item-menu" id="admin" @click="$router.push('/admin-panel')">
         <span>Painel Administrativo</span>
       </div>
     </Slide>

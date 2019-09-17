@@ -2,13 +2,13 @@
   <div class="form-wrapper">
     <md-field>
       <label>Usuário</label>
-      <md-input v-validate=""required"" v-model="user" name="user" type="text"></md-input>
+      <md-input v-validate="'required'" v-model="user" name="user" type="text"></md-input>
     </md-field>
       <span class="error">{{ errors.first("user") }}</span>
     
     <md-field>
       <label>Senha</label>
-      <md-input  v-validate=""required"" v-model="password" name="password" type="password"></md-input>
+      <md-input  v-validate="'required'" v-model="password" name="password" type="password"></md-input>
     </md-field>
     <span class="error">{{ errors.first("password") }}</span>
     <div class="button-wrapper">
