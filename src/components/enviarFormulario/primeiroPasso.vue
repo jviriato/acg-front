@@ -21,7 +21,7 @@
       Carga horária:
       <div class="input">
         <md-field>
-          <md-input v-model="horasAtividades"></md-input>
+          <md-input type="number" v-model="horasAtividades"></md-input>
         </md-field>
       </div>
       <p>horas</p>
@@ -39,10 +39,12 @@ import moment from "moment";
 export default {
   name: "primeiroPasso",
 
+  props: {
+    name: String,
+  },
+
   data() {
     return {
-      name: "José",
-      matricula: "",
       data: "",
       textarea: "",
       opcoes: [
@@ -68,7 +70,8 @@ export default {
     done() {
       this.$emit("fim-primeiro-passo", {
         opcaoSelecionada: this.opcaoSelecionada,
-        descricao_atividade: this.textarea
+        descricao_atividade: this.textarea,
+        horasAtividades: this.horasAtividades,
       });
     }
   }

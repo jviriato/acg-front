@@ -1,25 +1,27 @@
 <template>
   <div>
-    <Hero :hours="217" :total-hours="290" />
+    <Hero :hours="acgs.total_aprovado" :total-hours="totalHoras" :loading="loading"/>
     <div class="button-wrapper">
       <md-button class="md-dense md-raised md-primary button" @click="goToEnviarACG()">Enviar ACG</md-button>
     </div>
     <div class="acg-wrapper">
-        <acg-card nome="Participação em Eventos" horas="20" totalHoras="90" cor="#008F7A"/>
-        <acg-card nome="Projeto de Pesquisa" horas="80" totalHoras="120" cor="#2C73D2"/>
-        <acg-card nome="Monitoria" horas="90" totalHoras="90" cor="#845EC2"/>
-        <acg-card nome="Participação em Eventos" horas="20" totalHoras="90" cor="#008F7A"/>
-        <acg-card nome="Participação em Eventos" horas="20" totalHoras="90" cor="#008F7A"/>
-        <acg-card nome="Participação em Eventos" horas="20" totalHoras="90" cor="#008F7A"/>
+      <template v-if="!loading">
+        <template v-for="(acg, index) in acgs.por_categoria">
+          <acg-card v-bind:key="acg.efetivadas" :nome="index" :horas="acg.efetivadas" :totalHoras="acg.requisitadas" :cor="randomColor()"/>
+        </template>
+      </template>
+      <template v-else>
+        <p>Carregando...</p>
+      </template>
     </div>
   </div>
 </template>
 
 <script>
-import AcgCard from "@/components/commons/AcgCard.vue";
-import Hero from "@/components/Dashboard/Hero.vue";
+import AcgCard from '@/components/commons/AcgCard.vue';
+import Hero from '@/components/Dashboard/Hero.vue';
 export default {
-  name: "Dashboard",
+  name: 'Dashboard',
   components: {
     AcgCard,
     Hero
@@ -27,14 +29,68 @@ export default {
 
   data() {
     return {
-      acgs: []
-    };
+      totalHoras: 0,
+      acgs: [],
+      loading: true,
+      user: {},
+    }
+  },
+
+  mounted() {
+    this.getUserFromLocalStorage();
+    this.getHorasTotais();
+    this.getHorasAcgs();
   },
 
   methods: {
     goToEnviarACG() {
-      this.$router.push({ name: "enviarFormulario" });
-    }
+      this.$router.push({ name: 'enviarFormulario' });
+    },
+
+    getUserFromLocalStorage() {
+      this.user = JSON.parse(localStorage.getItem('user'));
+    },
+
+    async getHorasAcgs() {
+      try {
+        this.loading = true;
+        const matricula = this.user.matricula;
+        const {data: response} = await this.$http.get(`/acgs-horas/${matricula}`);
+  
+        if(response) {
+          this.acgs = response;
+        }
+        this.loading = false;
+      } catch (error) {
+        console.error(error);
+        this.loading = false;
+        this.$router.push({name: 'login'});
+      }
+    },
+
+    async getHorasTotais() {
+      try {
+        this.loading = true;
+        const matricula = this.user.matricula;
+        const {data: response} = await this.$http.get(`/aluno/${matricula}`);
+  
+        if(response) {
+          this.totalHoras = Number(response.curso.qtd_horas_totais_acg);
+        }
+
+        this.loading = false;
+      } catch (error) {
+        console.error(error);
+        this.loading = false;
+        this.$router.push({name: 'login'});
+      }
+    },
+
+    randomColor() {
+      return ('hsl(' + 320 * Math.random() + ', ' +
+                 '100%,' +
+                 (40 + 13 * Math.random()) + '%)');
+    },
   }
 };
 </script>

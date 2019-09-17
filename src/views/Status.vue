@@ -7,11 +7,14 @@
     </div>
     <div class="badges-wrapper">
       <div class="badges">
-        <status-badge name="V Semana Acadêmica da Informática" status="success" />
-        <status-badge name="III Game JAM" status="review" />
-        <status-badge name="IV Game JAM" status="failure" />
-        <status-badge name="Copa do Mundo 2014" status="success" />
-        <status-badge name="XXI Jogos Olímpicos" status="review" />
+        <template v-if="!loading">
+            <template v-for="acg in acgs">
+              <status-badge v-bind:key="acg.id" :name="acg.descricao" :status="acg.status" />
+            </template>
+        </template>
+        <template v-else>
+          <p>Carregando...</p>
+        </template>
       </div>
     </div>
   </div>
@@ -24,7 +27,43 @@ export default {
   name: "Status",
   components: {
     StatusBadge
-  }
+  },
+
+  data() {
+    return {
+      user: {},
+      acgs: [],
+      loading: false,
+    }
+  },
+
+  mounted() {
+    this.getUserFromLocalStorage();
+    this.getHorasAcgs();
+  },
+
+  methods: {
+    getUserFromLocalStorage() {
+      this.user = JSON.parse(localStorage.getItem('user'));
+    },
+
+    async getHorasAcgs() {
+      try {
+        this.loading = true;
+        const matricula = this.user.matricula;
+        const {data: response} = await this.$http.get(`/acgs-aluno/${matricula}`);
+  
+        if(response) {
+          this.acgs = response;
+        }
+        this.loading = false;
+      } catch (error) {
+        console.error(error);
+        this.loading = false;
+        this.$router.push({name: 'login'});
+      }
+    },
+  },
 };
 </script>
 

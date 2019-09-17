@@ -1,14 +1,19 @@
 <template>
   <div class="hero">
     <div class="hero-content">
-      <div class="progress-bar-wrapper">
-        <progress-bar type="circle" ref="circle" :options="options"></progress-bar>
-      </div>
-      <p class="text">
-        Você tem
-        <b>{{hours}}</b> horas de
-        <b>{{totalHours}}</b>.
-      </p>
+      <template v-if="!loading">
+        <div class="progress-bar-wrapper">
+          <progress-bar type="circle" ref="circle" :options="options"></progress-bar>
+        </div>
+        <p class="text">
+          Você tem
+          <b>{{hours}}</b> horas de
+          <b>{{totalHours}}</b>.
+        </p>
+      </template>
+      <template v-else>
+        <p>Carregando...</p>
+      </template>
     </div>
   </div>
 </template>
@@ -18,7 +23,8 @@ export default {
   name: "Hero",
   props: {
     hours: Number,
-    totalHours: Number
+    totalHours: Number,
+    loading: Boolean,
   },
 
   data() {
@@ -45,12 +51,31 @@ export default {
       }
     };
   },
-  mounted() {
+
+  watch: {
+    loading() {
+      if(!this.loading) {
+        this.calcPercentage();
+      }
+    }
+  },
+
+  updated() {
     this.calcPercentage();
   },
 
   methods: {
     calcPercentage() {
+      if(!this.hours || !this.totalHours) {
+        return;
+      }
+
+      if(this.hours > this.totalHours) {
+        this.setPercentage(100 * 0.01);
+        this.setTextPercentage(100 + "%");
+        return;
+      }
+
       let pct = Math.round((this.hours * 100) / this.totalHours);
       this.setPercentage(pct * 0.01);
       this.setTextPercentage(pct + "%");

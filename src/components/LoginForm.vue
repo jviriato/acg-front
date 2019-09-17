@@ -34,17 +34,46 @@ export default {
     };
   },
 
+  mounted() {
+    this.removeUserFromLocalStorage();
+  },
+
   methods: {
     isFormValid () {
       return !Object.keys(this.fields).some(key => this.fields[key].invalid)
     },
+
+    async getHorasTotais() {
+      try {
+        const matricula = 201962097;
+        const {data: response} = await this.$http.get(`/aluno/${matricula}`);
+  
+        if(response) {
+          localStorage.user = JSON.stringify(response);
+          return true;
+        }
+
+        return false;
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+    },
     
     signIn() {
-      if(this.isFormValid()) {
-        this.$router.push({name: 'dashboard'})
+      if(this.isFormValid() && this.getHorasTotais()) {
+        setTimeout(() => {
+          this.$router.push({name: 'dashboard'});
+        }, 1000);
+      }
+    },
+
+    removeUserFromLocalStorage() {
+      if (localStorage.user) {
+        localStorage.removeItem('user');
       }
     }
-  },
+  }
 };
 </script>
 
@@ -67,7 +96,7 @@ export default {
     border-radius: 22px !important;
     background: $primary !important;
     color: white !important;
-    font-family: 'Roboto';
+    font-family: "Roboto";
     font-weight: bold;
   }
 }

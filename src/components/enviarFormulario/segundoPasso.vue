@@ -29,10 +29,12 @@ import moment from "moment";
 export default {
   name: "segundoPasso",
 
+  props: {
+    name: String,
+  },
+
   data() {
     return {
-      name: "José",
-      matricula: "",
       data: "",
       localAtividade: "",
       dataInicial: null,
@@ -46,8 +48,9 @@ export default {
   methods: {
     done() {
       this.$emit("fim-segundo-passo", {
-        opcaoSelecionada: this.opcaoSelecionada,
-        descricao_atividade: this.textarea
+        localAtividade: this.localAtividade,
+        dataInicial: this.dataInicial,
+        dataFinal: this.dataFinal,
       });
     }
   }

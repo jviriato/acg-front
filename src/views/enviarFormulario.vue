@@ -3,14 +3,18 @@
     <div class="title">Enviar ACG</div>
     <div class="align">
       <div class="wrapper" v-if="step == 1">
-        <primeiro-passo v-on:fim-primeiro-passo="checkFirstStep" />
+        <primeiro-passo :name="cName" v-on:fim-primeiro-passo="checkFirstStep" />
       </div>
       <div class="wrapper" v-if="step == 2">
-        <segundo-passo v-on:fim-segundo-passo="checkFirstStep"/>
+        <segundo-passo :name="cName" v-on:fim-segundo-passo="checkSecondStep"/>
       </div>
       <div class="wrapper fim" v-if="step == 3">
         <icon-success />
         <h1>Parabéns! Sua ACG foi enviada com sucesso!</h1>
+      </div>
+      <div class="wrapper fim" v-if="step == 4">
+        <icon-success />
+        <h1>Erro! Ocorreu um problema ao enviar sua acg!</h1>
       </div>
     </div>
   </div>
@@ -35,20 +39,87 @@ export default {
   data() {
     return {
       step: 1,
-      name: "José",
-      matricula: "",
-      data: ""
+      data: "",
+      form: {
+        descricao: '',
+        tipo: '',
+        horas: '',
+        local: '',
+        data_inicio: '',
+        data_final: '',
+      },
+      user: {},
     };
   },
 
+  mounted() {
+    this.getUser();
+  },
+
+  computed: {
+    cName() {
+      if (this.user && this.user.nome) {
+        return this.user.nome;
+      }
+      return '';
+    }
+  },
+
   methods: {
+    getUser() {
+      this.user = JSON.parse(localStorage.getItem('user'));
+    },
+
     nextStep() {
       const TOTAL_STEPS = 3;
       this.step += 1 % TOTAL_STEPS;
     },
 
     checkFirstStep(data) {
+      if(!data || !data.descricao_atividade || !data.opcaoSelecionada || !data.horasAtividades) {
+        alert('preencha todos os campos');
+        return;
+      }
+
+      this.form.descricao = data.descricao_atividade;
+      this.form.tipo = data.opcaoSelecionada;
+      this.form.horas = data.horasAtividades;
       this.nextStep();
+    },
+
+    checkSecondStep(data) {
+      if(!data || !data.localAtividade || !data.dataInicial || !data.dataFinal) {
+        alert('preencha todos os campos');
+        return;
+      }
+
+      this.form.local = data.localAtividade;
+      this.form.data_inicio = data.dataInicial;
+      this.form.data_final = data.dataFinal;
+      this.enviarAcg();
+    },
+
+    async enviarAcg() {
+      const data_inicial = moment(this.form.data_inicio, 'YYYY-MM-DD').format('YYYY-MM-DD');
+      const data_final = moment(this.form.data_final, 'YYYY-MM-DD').format('YYYY-MM-DD');
+
+      try {
+        await this.$http.post('/acg', {
+          id_aluno: this.user.id,
+          id_categoria: 2,
+          horas_requisitadas: this.form.horas,
+          local_atividade: this.form.local,
+          data_inicial: data_inicial,
+          data_final: data_final,
+          descricao: this.form.descricao,
+        });
+
+
+        this.nextStep();
+      } catch (error) {
+        console.error(error);
+        this.step = 4;
+      }
     }
   }
 };

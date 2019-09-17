@@ -19,8 +19,8 @@ export default {
   name: "AcgCard",
   props: {
     nome: String,
-    horas: String,
-    totalHoras: String,
+    horas: Number,
+    totalHoras: Number,
     cor: String
   },
 
@@ -104,6 +104,7 @@ export default {
 .title {
     font-weight: bold;
     font-size: 3em;
+    line-height: normal;
 }
 
 .percentage {

@@ -1,62 +1,49 @@
-<template>
-  <div class="badge" :class="status">
-      <div class="name"> {{ name }} </div>
-      <div class="status"> {{ statusText }} </div>
-  </div>
-</template>
+  <template>
+    <div class="badge" :class="status">
+      <div class="name">{{ name }}</div>
+      <div class="status">{{ statusText }}</div>
+    </div>
+  </template>
 
 <script>
 export default {
-    name: "StatusBadge",
+  name: "StatusBadge",
 
-    props: {
-        name: String,
-        status: String,
-    },
+  props: {
+    name: String,
+    status: String,
+  },
 
-    data() {
-        return {
-            statusText: "Em Análise",
-        }
-    },
+  data() {
+    return {
+      statusText: "Pendente",
+    }
+  },
 
-    mounted() {
-        this.setStatusText();
-    },
+  mounted() {
+    this.setStatusText();
+  },
 
-    methods: {
-        setStatusText() {
-            console.log(this.status);
-            switch(this.status) {
-                case 'success':
-                    this.statusText = "Aprovada";
-                    break;
-                case 'failure':
-                    this.statusText = "Rejeitada";
-                    break;
-                case 'review':
-                    this.statusText = "Em Análise";
-                    break;
-                default:
-                    this.statusText = "Em Análise";
-            }
-        }
-    },
+  methods: {
+    setStatusText() {
+      this.statusText = this.status;
+    }
+  },
 }
 </script>
 
-<style lang="scss" scoped>
-$background-success: #dff7f5;
-$success: #69b4af;
-$failure: #c36462;
-$review: #e7bf74;
-.badge {
+  <style lang="scss" scoped>
+  $background-Aprovada: #dff7f5;
+  $Aprovada: #69b4af;
+  $Reprovada: #c36462;
+  $Pendente: #e7bf74;
+  .badge {
     display: flex;
-    font-family: 'Roboto';
+    font-family: "Roboto";
     color: white;
     font-weight: 700;
     display: flex;
-    margin: .5em;
+    margin: 0.5em;
     padding: 1em;
     width: 90%;
     background: white;
@@ -65,23 +52,22 @@ $review: #e7bf74;
     border-radius: 8px;
     transition: box-shadow 0.3s ease-in;
     &:hover {
-        box-shadow: 0 5px 10px rgba(154,160,185,.025), 0 15px 30px rgba(166,173,201,.2);
+      box-shadow: 0 5px 10px rgba(154, 160, 185, 0.025),
+        0 15px 30px rgba(166, 173, 201, 0.2);
     }
     .name {
-        text-align: left;
+      text-align: left;
     }
-}
-.success {
-    background-color: $success;
-}
+  }
+  .Aprovada {
+    background-color: $Aprovada;
+  }
 
-.failure {
-    background-color: $failure;
+  .Reprovada {
+    background-color: $Reprovada;
+  }
 
-}
-
-.review {
-    background-color: $review;
-}
-
-</style>
+  .Pendente {
+    background-color: $Pendente;
+  }
+  </style>
