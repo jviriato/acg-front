@@ -47,6 +47,7 @@ export default {
         local: "",
         data_inicio: "",
         data_final: "",
+        files: [],
       },
       user: {},
     };
@@ -96,6 +97,7 @@ export default {
       this.form.local = data.localAtividade;
       this.form.data_inicio = data.dataInicial;
       this.form.data_final = data.dataFinal;
+      this.form.files = data.files;
       this.enviarAcg();
     },
 
@@ -103,16 +105,22 @@ export default {
       const data_inicial = moment(this.form.data_inicio, "YYYY-MM-DD").format("YYYY-MM-DD");
       const data_final = moment(this.form.data_final, "YYYY-MM-DD").format("YYYY-MM-DD");
 
+      const formData = new FormData();
+      formData.append("id_aluno", this.user.id || null);
+      formData.append("id_categoria", 2 || null);
+      formData.append("horas_requisitadas", this.form.horas || null);
+      formData.append("local_atividade", this.form.local || null);
+      formData.append("data_inicial", data_inicial || null);
+      formData.append("data_final", data_final || null);
+      formData.append("descricao", this.form.descricao || null);
+
+
+      for (let i = 0; i < this.form.files.length; i++) {
+        formData.append("files[]", this.form.files[i]);
+      }
+
       try {
-        await this.$http.post("/acg", {
-          id_aluno: this.user.id,
-          id_categoria: 2,
-          horas_requisitadas: this.form.horas,
-          local_atividade: this.form.local,
-          data_inicial: data_inicial,
-          data_final: data_final,
-          descricao: this.form.descricao,
-        });
+        await this.$http.post("/acg", formData);
 
 
         this.nextStep();

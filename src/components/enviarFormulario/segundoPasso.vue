@@ -17,6 +17,23 @@
     <md-datepicker v-model="dataFinal">
       <label>Data final</label>
     </md-datepicker>
+
+    <md-field>
+      <label>Inserir Anexos</label>
+      <md-file 
+        @md-change="adicionaArquivoLista"
+        multiple 
+      />
+    </md-field>
+    <template v-for="(file, key) in files">
+      <div class="row" :key="key">
+        <div class="col-md-12">
+          <a title="Remover" v-on:click="removeArquivo( key )">Remover</a>
+          {{ file.name }}
+        </div>
+      </div>
+    </template>
+
     <div class="button-wrapper">
       <md-button class="md-dense md-raised md-primary button" @click="done()">Próximo</md-button>
     </div>
@@ -39,6 +56,7 @@ export default {
       localAtividade: "",
       dataInicial: null,
       dataFinal: null,
+      files: [],
     };
   },
   mounted() {
@@ -51,8 +69,17 @@ export default {
         localAtividade: this.localAtividade,
         dataInicial: this.dataInicial,
         dataFinal: this.dataFinal,
+        files: this.files,
       });
-    }
+    },
+    adicionaArquivoLista(files) {
+      for(let i = 0; i < files.length; i++ ) {
+        this.files.push(files[i]);
+      }    
+    },
+    removeArquivo(posicao) {
+      this.files.splice(posicao, 1);
+    },
   }
 };
 </script>
