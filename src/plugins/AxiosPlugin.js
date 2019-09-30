@@ -5,8 +5,8 @@ import EventBus from "./EventBus";
 Vue.use(EventBus);
 const vue = new Vue({});
 
-const API_URL = "https://acg-api.herokuapp.com/api";
-// const API_URL = "http://localhost:8000/api";
+// const API_URL = "https://acg-api.herokuapp.com/api";
+const API_URL = "http://localhost:8000/api";
 
 axios.interceptors.request.use((config) => {
   const usuario = JSON.parse(localStorage.getItem("usuario"));

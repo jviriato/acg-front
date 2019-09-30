@@ -45,7 +45,7 @@ export default {
 
     async getHorasTotais() {
       try {
-        const matricula = 201962097;
+        const matricula = 200663849;
         const {data: response} = await this.$http.get(`/aluno/${matricula}`);
   
         if(response) {
@@ -73,6 +73,7 @@ export default {
         localStorage.removeItem("user");
       }
     }
+
   }
 };
 </script>
