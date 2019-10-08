@@ -59,8 +59,36 @@ export default {
         return false;
       }
     },
+
+    verificarSecretaria() {
+      return this.user == 'secretaria' && this.password == '1542';
+    },
+
+    verificarColegiado() {
+      return this.user == 'colegiado' && this.password == '1542';
+    },
     
     signIn() {
+      if (!this.isFormValid()) {
+        return;
+      }
+
+      if (this.verificarSecretaria()) {
+        localStorage.user = JSON.stringify({nome: 'secretaria'});
+        setTimeout(() => {
+          this.$router.push({name: "adminPanel"});
+        }, 1000);
+        return;
+      }
+
+      if (this.verificarColegiado()) {
+        localStorage.user = JSON.stringify({nome: 'colegiado'});
+        setTimeout(() => {
+          this.$router.push({name: " colegiadoPanel"});
+        }, 1000);
+        return;
+      }
+
       if(this.isFormValid() && this.getHorasTotais()) {
         setTimeout(() => {
           this.$router.push({name: "dashboard"});
