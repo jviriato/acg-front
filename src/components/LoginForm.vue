@@ -74,7 +74,6 @@ export default {
       }
 
       if (this.verificarSecretaria()) {
-        console.log('entrous')
         localStorage.user = JSON.stringify({nome: 'secretaria'});
         setTimeout(() => {
           this.$router.push({name: "adminPanel"});

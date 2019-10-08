@@ -116,7 +116,7 @@ export default {
         console.log(data);
         url = data.data.anexo[0].local_do_anexo;
         console.log(url);
-        return '<a href="' +  url + '">Link</a>'
+        return '<a target="_blank" href="' +  url + '">Link</a>'
     },
     // calcData() {
     //   if(this.data) {
