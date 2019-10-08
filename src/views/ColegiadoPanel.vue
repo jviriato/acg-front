@@ -87,12 +87,11 @@ export default {
       const data = request.data;
       let dados = [];
       console.log(data);
-      data.forEach(e => {
-        let anexo = e.anexo.length > 0 ? 'bb' : 'aa';
+      data.forEach(async e => {
         let aluno = {
           id: e.id,
           nome: e.aluno.nome,
-          anexo: e.anexo.length > 0 ? this.trataUrl(e.anexo[0].local_do_anexo) : 'N/A',
+          anexo: e.anexo.length > 0 ? await this.trataUrl(e.anexo[0].local_do_anexo, e.id) : 'N/A',
           matricula: e.aluno.matricula,
           categoria: e.categoria.tipo,
           status: e.status,
@@ -111,8 +110,13 @@ export default {
     },
 
 
-    trataUrl(local_anexo) {
-        return '<a href="' +  'http://localhost:8000/' + local_anexo.replace('public', 'storage') + '">Link</a>'
+    async trataUrl(local_anexo, id) {
+        let url;
+        const data = await this.$http.get('/acg-unica/' + id);
+        console.log(data);
+        url = data.data.anexo[0].local_do_anexo;
+        console.log(url);
+        return '<a href="' +  url + '">Link</a>'
     },
     // calcData() {
     //   if(this.data) {
