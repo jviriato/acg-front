@@ -7,7 +7,7 @@
       crossorigin="anonymous"
     />
     <template v-if="this.$route.path !== '/'">
-      <Slide v-if="this.user.nome != 'secretaria' && this.user.nome != 'colegiado'">
+      <Slide v-if="cUsuarioNormal">
         <div class="item-menu" id="dashboard" @click="$router.push('/dashboard')">
           <span>Dashboard</span>
         </div>
@@ -16,9 +16,6 @@
         </div>
         <div class="item-menu" id="status" @click="$router.push('/status')">
           <span>Status das ACGs</span>
-        </div>
-        <div class="item-menu" id="admin" @click="$router.push('/admin-panel')">
-          <span>Painel Administrativo</span>
         </div>
       </Slide>
     </template>
@@ -43,6 +40,12 @@ export default {
   mounted() {
     this.$emit("toggle-collapse");
     this.getUserFromLocalStorage();
+  },
+
+  computed: {
+    cUsuarioNormal() {
+      return this.user && this.user.nome != 'secretaria' && this.user.nome != 'colegiado';
+    },
   },
 
   methods: {

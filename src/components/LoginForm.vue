@@ -43,9 +43,9 @@ export default {
       return !Object.keys(this.fields).some(key => this.fields[key].invalid)
     },
 
-    async getHorasTotais() {
+    async getUsuario() {
       try {
-        const matricula = 200663849;
+        const matricula = 201962097;
         const {data: response} = await this.$http.get(`/aluno/${matricula}`);
   
         if(response) {
@@ -74,6 +74,7 @@ export default {
       }
 
       if (this.verificarSecretaria()) {
+        console.log('entrous')
         localStorage.user = JSON.stringify({nome: 'secretaria'});
         setTimeout(() => {
           this.$router.push({name: "adminPanel"});
@@ -84,12 +85,12 @@ export default {
       if (this.verificarColegiado()) {
         localStorage.user = JSON.stringify({nome: 'colegiado'});
         setTimeout(() => {
-          this.$router.push({name: " colegiadoPanel"});
+          this.$router.push({name: "colegiadoPanel"});
         }, 1000);
         return;
       }
 
-      if(this.isFormValid() && this.getHorasTotais()) {
+      if(this.isFormValid() && this.getUsuario()) {
         setTimeout(() => {
           this.$router.push({name: "dashboard"});
         }, 1000);
