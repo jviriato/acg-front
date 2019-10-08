@@ -113,7 +113,6 @@ export default {
 
     trataUrl(local_anexo) {
         return '<a href="' +  'http://localhost:8000/' + local_anexo.replace('public', 'storage') + '">Link</a>'
-        return '<img src="' +  '" alt="">'
     },
     // calcData() {
     //   if(this.data) {
