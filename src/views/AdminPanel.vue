@@ -7,6 +7,9 @@
         {{key}}:  
         </h3>
         <h3>
+          <template v-if="key != 'Total'">
+            {{calcularPorcentagem(item)}}% - 
+          </template>
          {{item}}h
         </h3>
       </div>
@@ -79,6 +82,12 @@ export default {
       });
           // this.calcData();
 
+    },
+
+    calcularPorcentagem(horas) {
+      let porcent = horas*100/this.stats['Total'];
+      porcent = porcent.toFixed(0); 
+      return porcent;
     },
 
     // calcData() {
