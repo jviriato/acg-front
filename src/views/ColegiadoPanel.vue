@@ -17,6 +17,7 @@
             <th>Nome</th>
             <th>Matrícula</th>
             <th>Categoria</th>
+            <th>Anexo</th>
             <th>Status</th>
             <th>Horas Requisitadas</th>
             <th>Data Final</th>
@@ -26,6 +27,7 @@
             <td class="padding">{{d.nome}}</td>
             <td>{{d.matricula}}</td>
             <td>{{d.categoria}}</td>
+            <td><span v-html="d.anexo"></span></td>
             <td>{{d.status}}</td>
             <td>{{d.horas_requisitadas}}</td>
             <td>{{d.data_final}}</td>
@@ -86,9 +88,11 @@ export default {
       let dados = [];
       console.log(data);
       data.forEach(e => {
+        let anexo = e.anexo.length > 0 ? 'bb' : 'aa';
         let aluno = {
           id: e.id,
           nome: e.aluno.nome,
+          anexo: e.anexo.length > 0 ? this.trataUrl(e.anexo[0].local_do_anexo) : 'N/A',
           matricula: e.aluno.matricula,
           categoria: e.categoria.tipo,
           status: e.status,
@@ -106,6 +110,11 @@ export default {
 
     },
 
+
+    trataUrl(local_anexo) {
+        return '<a href="' +  'http://localhost:8000/' + local_anexo.replace('public', 'storage') + '">Link</a>'
+        return '<img src="' +  '" alt="">'
+    },
     // calcData() {
     //   if(this.data) {
     //     this.data.forEach(d => {
