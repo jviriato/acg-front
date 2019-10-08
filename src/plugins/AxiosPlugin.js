@@ -1,6 +1,8 @@
 import Vue from "vue";
 import axios from "axios";
 import EventBus from "./EventBus";
+import router from '../router';
+
 
 Vue.use(EventBus);
 const vue = new Vue({});
@@ -9,12 +11,14 @@ const vue = new Vue({});
 const API_URL = "http://localhost:8000/api";
 
 axios.interceptors.request.use((config) => {
-  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  const usuario = JSON.parse(localStorage.getItem("user"));
+
+  if (!usuario) {
+    return router.push('/');
+  }
+  
   if (config.url.search("local") == -1) {
     config.url = API_URL + config.url;
-  }
-  if (usuario) {
-    config.headers.common["Authorization"] = `Bearer ${usuario.access_token}`;
   }
   return config;
 });
