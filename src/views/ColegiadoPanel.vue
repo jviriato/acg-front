@@ -84,7 +84,6 @@ export default {
       let request = await this.$http.get("/acgs").then(d => (request = d));
       const data = request.data;
       let dados = [];
-      console.log(data);
       data.forEach(e => {
         let aluno = {
           id: e.id,

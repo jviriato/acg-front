@@ -64,7 +64,6 @@ export default {
       let request = await this.$http.get("/acgs").then(d => (request = d));
       const data = request.data;
       let dados = [];
-      console.log(data);
       data.forEach(e => {
         let aluno = {
           nome: e.aluno.nome,
@@ -76,7 +75,6 @@ export default {
         };
         this.stats[e.categoria.tipo] += e.horas_efetivadas;
         this.stats['Total'] += e.horas_efetivadas;
-        // console.log(this.stats)
         this.data.push(aluno);
       });
           // this.calcData();
