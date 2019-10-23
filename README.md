@@ -13,30 +13,9 @@
 
 # acg-front
 
-## Project setup
-```
-npm install
-```
+## Quem somos
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Visamos facilitar a esteira burocrática do envio de ACGs -Atividades Complementares à Graduação- nas universidades federais, através de um sistema simples, prático e rápido!
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Nossa solução se dá através de um sistema web responsivo que pode-se tornar aplicativo. Nele existe a possibilidade do envio de acgs, com anexos e disparo automático de notificação através de email para os responsáveis pelo processo de aprovação. Além disso, tornamos o acompanhamento da aprovação ACG simples e fácil!
