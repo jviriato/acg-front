@@ -45,7 +45,7 @@ export default {
 
     async getUsuario() {
       try {
-        const matricula = 201962097;
+        const matricula = 200189442;
         const {data: response} = await this.$http.get(`/aluno/${matricula}`);
   
         if(response) {
