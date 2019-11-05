@@ -15,24 +15,28 @@
       </div>
     </div>
     <div class="table-wrapper">
-        <table style="width:100%">
-        <tr>
-            <th>Nome</th>
-            <th>Matrícula</th>
-            <th>Categoria</th>
-            <th>Status</th>
-            <th>Horas Requisitadas</th>
-            <th>Horas Efetivadas</th>
-        </tr>
-        <tr v-for="(d, index) in data" :key="index">
-            <td>{{d.nome}}</td>
-            <td>{{d.matricula}}</td>
-            <td>{{d.categoria}}</td>
-            <td>{{d.status}}</td>
-            <td>{{d.horas_requisitadas}}</td>
-            <td>{{d.horas_efetivadas}}</td>
-        </tr>
-        </table>
+      <table style="width:100%">
+      <tr>
+          <th>Nome</th>
+          <th>Matrícula</th>
+          <th>Categoria</th>
+          <th>Status</th>
+          <th>Horas Requisitadas</th>
+          <th>Horas Efetivadas</th>
+      </tr>
+      <tr v-for="(d, index) in data" :key="index">
+          <td>{{d.nome}}</td>
+          <td>{{d.matricula}}</td>
+          <td>{{d.categoria}}</td>
+          <td>{{d.status}}</td>
+          <td>{{d.horas_requisitadas}}</td>
+          <td>{{d.horas_efetivadas}}</td>
+      </tr>
+      </table>
+
+      <template v-if="!cTemDados">
+        Não existem dados
+      </template>
     </div>
   </div>
 </template>
@@ -59,7 +63,14 @@ export default {
   },
 
   mounted() {
+    this.$events.$emit('login');
     this.getData();
+  },
+
+  computed: {
+    cTemDados() {
+      return this.data.length != 0;
+    }
   },
 
   methods: {

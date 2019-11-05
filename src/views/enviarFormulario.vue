@@ -49,26 +49,26 @@ export default {
         data_final: "",
         files: [],
       },
-      user: {},
+      usuario: {},
     };
   },
 
   mounted() {
-    this.getUser();
+    this.getusuario();
   },
 
   computed: {
     cName() {
-      if (this.user && this.user.nome) {
-        return this.user.nome;
+      if (this.usuario && this.usuario.nome) {
+        return this.usuario.nome;
       }
       return "";
     }
   },
 
   methods: {
-    getUser() {
-      this.user = JSON.parse(localStorage.getItem("user"));
+    getusuario() {
+      this.usuario = JSON.parse(localStorage.getItem("usuario"));
     },
 
     nextStep() {
@@ -106,7 +106,7 @@ export default {
       const data_final = moment(this.form.data_final, "YYYY-MM-DD").format("YYYY-MM-DD");
 
       const formData = new FormData();
-      formData.append("id_aluno", this.user.id || null);
+      formData.append("id_aluno", this.usuario.id || null);
       formData.append("id_categoria", 2 || null);
       formData.append("horas_requisitadas", this.form.horas || null);
       formData.append("local_atividade", this.form.local || null);

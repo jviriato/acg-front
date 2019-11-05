@@ -31,26 +31,26 @@ export default {
 
   data() {
     return {
-      user: {},
+      usuario: {},
       acgs: [],
       loading: false,
     }
   },
 
   mounted() {
-    this.getUserFromLocalStorage();
+    this.getusuarioFromLocalStorage();
     this.getHorasAcgs();
   },
 
   methods: {
-    getUserFromLocalStorage() {
-      this.user = JSON.parse(localStorage.getItem("user"));
+    getusuarioFromLocalStorage() {
+      this.usuario = JSON.parse(localStorage.getItem("usuario"));
     },
 
     async getHorasAcgs() {
       try {
         this.loading = true;
-        const matricula = this.user.matricula;
+        const matricula = this.usuario.matricula;
         const {data: response} = await this.$http.get(`/acgs-aluno/${matricula}`);
   
         if(response) {

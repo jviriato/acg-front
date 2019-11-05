@@ -9,6 +9,9 @@ import { MdButton, MdContent, MdField, MdCard, MdMenu, MdList, MdDatepicker } fr
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
 import "./registerServiceWorker";
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+Vue.use(VueSweetalert2);
 Vue.use(VueProgress);
 Vue.use(VeeValidate);
 Vue.use(MdButton);

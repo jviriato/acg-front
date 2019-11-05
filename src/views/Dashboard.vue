@@ -32,14 +32,17 @@ export default {
       totalHoras: 0,
       acgs: [],
       loading: true,
-      user: {},
+      usuario: {},
     }
   },
 
   mounted() {
+    this.$events.$emit('login');
     this.getUserFromLocalStorage();
-    this.getHorasTotais();
-    this.getHorasAcgs();
+    setTimeout(() => {
+      this.getHorasTotais();
+      this.getHorasAcgs();
+    }, 1000);
   },
 
   methods: {
@@ -48,13 +51,16 @@ export default {
     },
 
     getUserFromLocalStorage() {
-      this.user = JSON.parse(localStorage.getItem("user"));
+      this.usuario = JSON.parse(localStorage.getItem("usuario"));
+      console.log('this.usuario dashboard');
+      console.log(this.usuario);
+      
     },
 
     async getHorasAcgs() {
       try {
         this.loading = true;
-        const matricula = this.user.matricula;
+        const matricula = this.usuario.matricula;
         const {data: response} = await this.$http.get(`/acgs-horas/${matricula}`);
   
         if(response) {
@@ -71,7 +77,7 @@ export default {
     async getHorasTotais() {
       try {
         this.loading = true;
-        const matricula = this.user.matricula;
+        const matricula = this.usuario.matricula;
         const {data: response} = await this.$http.get(`/aluno/${matricula}`);
   
         if(response) {

@@ -43,62 +43,62 @@ export default {
       return !Object.keys(this.fields).some(key => this.fields[key].invalid)
     },
 
-    async getUsuario() {
+    async getUsuario(resultado) {
       try {
-        const matricula = 200189442;
-        const {data: response} = await this.$http.get(`/aluno/${matricula}`);
-  
-        if(response) {
-          localStorage.user = JSON.stringify(response);
-          return true;
+        console.log(resultado);
+        
+        if (resultado.matricula == '') {
+          localStorage.usuario = JSON.stringify(resultado);
+          this.redirecionarUsuario(resultado);
+          return;
         }
 
-        return false;
+        const {data: response} = await this.$http.get(`/aluno/${resultado.matricula}`);
+  
+        if(response) { 
+          localStorage.usuario = JSON.stringify(response);
+          this.redirecionarUsuario(resultado);
+        }
       } catch (error) {
         console.error(error);
-        return false;
       }
     },
 
-    verificarSecretaria() {
-      return this.user == 'secretaria' && this.password == '1542';
-    },
+    redirecionarUsuario(response) {
+      if (response.nome == 'secretaria') {
+        return this.$router.push({name: "adminPanel"});
+      }
 
-    verificarColegiado() {
-      return this.user == 'colegiado' && this.password == '1542';
+      if (response.nome == 'colegiado') {
+        return this.$router.push({name: "colegiadoPanel"});
+      }
+
+      return this.$router.push({name: "dashboard"});
     },
     
-    signIn() {
+    async signIn() {
       if (!this.isFormValid()) {
         return;
       }
 
-      if (this.verificarSecretaria()) {
-        localStorage.user = JSON.stringify({nome: 'secretaria'});
-        setTimeout(() => {
-          this.$router.push({name: "adminPanel"});
-        }, 1000);
-        return;
-      }
+      try {
+        const body = {
+          'nome': this.user,
+          'senha': this.password,
+        };
 
-      if (this.verificarColegiado()) {
-        localStorage.user = JSON.stringify({nome: 'colegiado'});
-        setTimeout(() => {
-          this.$router.push({name: "colegiadoPanel"});
-        }, 1000);
-        return;
-      }
+        const { data: response } = await this.$http.post('/login', body);
 
-      if(this.isFormValid() && this.getUsuario()) {
-        setTimeout(() => {
-          this.$router.push({name: "dashboard"});
-        }, 1000);
+        this.getUsuario(response);
+      } catch (error) {
+        console.error(error);
+        return this.$swal('Atenção!', 'Usuário ou senha inválidos.', 'error');
       }
     },
 
     removeUserFromLocalStorage() {
-      if (localStorage.user) {
-        localStorage.removeItem("user");
+      if (localStorage.usuario) {
+        localStorage.removeItem("usuario");
       }
     }
 
