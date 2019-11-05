@@ -12,28 +12,32 @@
       </div>
     </div> -->
     <div class="table-wrapper">
-        <table style="width:100%">
-        <tr>
-            <th>Nome</th>
-            <th>Matrícula</th>
-            <th>Categoria</th>
-            <th>Anexo</th>
-            <th>Status</th>
-            <th>Horas Requisitadas</th>
-            <th>Data Final</th>
-            <th>Aprovar?</th>
-        </tr>
-        <tr v-for="(d, index) in data" :key="index" >
-            <td class="padding">{{d.nome}}</td>
-            <td>{{d.matricula}}</td>
-            <td>{{d.categoria}}</td>
-            <td><span v-html="d.anexo"></span></td>
-            <td>{{d.status}}</td>
-            <td>{{d.horas_requisitadas}}</td>
-            <td>{{d.data_final}}</td>
-            <td class="actions"><img src="./../assets/icons/verified.png" alt="ok" @click="aprovar(d)"><img src="./../assets/icons/delete.png" alt="not_ok" @click="reprovar(d)"></td>
-        </tr>
-        </table>
+      <table style="width:100%">
+      <tr>
+          <th>Nome</th>
+          <th>Matrícula</th>
+          <th>Categoria</th>
+          <th>Anexo</th>
+          <th>Status</th>
+          <th>Horas Requisitadas</th>
+          <th>Data Final</th>
+          <th>Aprovar?</th>
+      </tr>
+      <tr v-for="(d, index) in data" :key="index" >
+          <td class="padding">{{d.nome}}</td>
+          <td>{{d.matricula}}</td>
+          <td>{{d.categoria}}</td>
+          <td><span v-html="d.anexo"></span></td>
+          <td>{{d.status}}</td>
+          <td>{{d.horas_requisitadas}}</td>
+          <td>{{d.data_final}}</td>
+          <td class="actions"><img src="./../assets/icons/verified.png" alt="ok" @click="aprovar(d)"><img src="./../assets/icons/delete.png" alt="not_ok" @click="reprovar(d)"></td>
+      </tr>
+      </table>
+
+      <template v-if="!cTemDados">
+        Não existem dados
+      </template>
     </div>
   </div>
 </template>
@@ -60,7 +64,14 @@ export default {
   },
 
   mounted() {
+    this.$events.$emit('login');
     this.getData();
+  },
+
+  computed: {
+    cTemDados() {
+      return this.data.length != 0;
+    }
   },
 
   methods: {

@@ -6,8 +6,8 @@
       integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
       crossorigin="anonymous"
     />
-    <template v-if="this.$route.path !== '/'">
-      <Slide v-if="cUsuarioNormal">
+    <template v-if="this.$route.path !== '/' && cUsuarioNormal">
+      <Slide>
         <div class="item-menu" id="dashboard" @click="$router.push('/dashboard')">
           <span>Dashboard</span>
         </div>
@@ -33,24 +33,30 @@ export default {
 
   data() {
     return {
-      user: '',
+      usuario: '',
     };
   },
 
   mounted() {
     this.$emit("toggle-collapse");
     this.getUserFromLocalStorage();
+
+    this.$events.$on('login', () => {
+      this.getUserFromLocalStorage();
+    });
   },
 
   computed: {
     cUsuarioNormal() {
-      return this.user && this.user.nome != 'secretaria' && this.user.nome != 'colegiado';
+      return this.usuario != null && this.usuario.nome != 'secretaria' && this.usuario.nome != 'colegiado';
     },
   },
 
   methods: {
     getUserFromLocalStorage() {
-      this.user = JSON.parse(localStorage.getItem("user"));
+      this.usuario = JSON.parse(localStorage.getItem("usuario"));
+      console.log(this.usuario);
+      
     },
   },
 };
@@ -59,22 +65,12 @@ export default {
 <style lang="scss">
 #app {
   font-family: "Roboto", "Avenir", Helvetica, Arial, sans-serif;
-  background: $background-gray;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: $background-color;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  height: 100%;
+  background-color: $background-gray;
 }
 .bm-burger-button {
   position: fixed;
@@ -120,7 +116,7 @@ export default {
 }
 
 .bm-overlay {
-  background: rgba(0, 0, 0, 0.3);
+  background: transparent;
 }
 .bm-item-list {
   color: #b8b7ad;
