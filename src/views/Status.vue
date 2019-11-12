@@ -55,6 +55,7 @@ export default {
   
         if(response) {
           this.acgs = response;
+          this.acgs = this.acgs.reverse;
         }
         this.loading = false;
       } catch (error) {
