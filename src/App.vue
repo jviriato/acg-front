@@ -19,6 +19,9 @@
         </div>
       </Slide>
     </template>
+    <div class="sair" v-if="this.$route.path !== '/'">
+      <img src="./assets/icons/logout.png" @click="logout">
+    </div>
     <router-view />
   </div>
 </template>
@@ -55,14 +58,25 @@ export default {
   methods: {
     getUserFromLocalStorage() {
       this.usuario = JSON.parse(localStorage.getItem("usuario"));
-      console.log(this.usuario);
-      
     },
+    logout() {
+      this.$router.push('/');
+    }
   },
 };
 </script>
 
 <style lang="scss">
+.sair {
+  float: right;
+
+  img {
+    margin-left: -60px;
+    margin-top: 35px;
+    position: absolute;
+    width: 35px;
+  }
+}
 #app {
   font-family: "Roboto", "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
